@@ -5,16 +5,16 @@ from tkinter import messagebox
 # تابع بررسی اعتبار اطلاعات ورود
 def check_credentials():
     # دریافت نام کاربری و رمز عبور وارد شده توسط کاربر
-    username = username_entry.get()
+    u_name = u_name_entry.get()
     password = password_entry.get()
 
     # خواندن نام کاربری و رمز عبور ذخیره شده از فایل
     with open("credentials.txt", "r") as f:
-        saved_username = f.readline().strip().split(": ")[1]
+        saved_u_name = f.readline().strip().split(": ")[1]
         saved_password = f.readline().strip().split(": ")[1]
 
     # بررسی درستی اطلاعات ورود
-    if username == saved_username and password == saved_password:
+    if u_name == saved_u_name and password == saved_password:
         messagebox.showinfo("تایید", "ورود موفق")
         show_text_window()
     else:
@@ -25,18 +25,18 @@ def register():
     # تابع ذخیره اطلاعات کاربر
     def save_credentials():
         # دریافت نام کاربری و رمز عبور و تأیید رمز عبور وارد شده توسط کاربر
-        username = reg_username_entry.get()
+        u_name = reg_u_name_entry.get()
         password = reg_password_entry.get()
-        confirm_password = reg_confirm_password_entry.get()
+        confi_pass = reg_confi_pass_entry.get()
 
         # بررسی درستی رمز عبور و تأیید رمز عبور
-        if password != confirm_password:
+        if password != confi_pass:
             messagebox.showerror("مشکله", "رمزت غلطه")
             return
 
         # ذخیره نام کاربری و رمز عبور در فایل
         with open("credentials.txt", "w") as f:
-            f.write(f"username: {username}\n")
+            f.write(f"u_name: {u_name}\n")
             f.write(f"password: {password}\n")
 
         # نمایش پیغام موفقیت ثبت‌نام و بستن پنجره ثبت‌نام
@@ -50,8 +50,8 @@ def register():
 
     # اضافه کردن المان‌های مربوط به نام کاربری
     ttk.Label(register_window, text="نام انبار دارو:").pack(pady=10)
-    reg_username_entry = ttk.Entry(register_window)
-    reg_username_entry.pack()
+    reg_u_name_entry = ttk.Entry(register_window)
+    reg_u_name_entry.pack()
 
     # اضافه کردن المان‌های مربوط به رمز عبور
     ttk.Label(register_window, text="پسوورد:").pack(pady=10)
@@ -60,8 +60,8 @@ def register():
 
     # اضافه کردن المان‌های مربوط به تأیید رمز عبور
     ttk.Label(register_window, text="تکرار پسوورد:").pack(pady=10)
-    reg_confirm_password_entry = ttk.Entry(register_window, show='*')
-    reg_confirm_password_entry.pack()
+    reg_confi_pass_entry = ttk.Entry(register_window, show='*')
+    reg_confi_pass_entry.pack()
 
     # اضافه کردن دکمه ثبت‌نام
     ttk.Button(register_window, text="ایجاد انبار  :)", command=save_credentials).pack(pady=10)
@@ -112,8 +112,8 @@ with open("style.tcl", "r") as f:
     root.tk.eval(style)
 
 ttk.Label(root, text="نام انبار:").pack(pady=10)
-username_entry = ttk.Entry(root)
-username_entry.pack()
+u_name_entry = ttk.Entry(root)
+u_name_entry.pack()
 
 ttk.Label(root, text="پسوورد:").pack(pady=10)
 password_entry = ttk.Entry(root, show='*')
